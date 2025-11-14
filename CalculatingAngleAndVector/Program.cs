@@ -17,13 +17,13 @@ namespace CalculatingAngleAndVector
         static void Main(string[] args)     //legally obliged to have this
         {
             Program program = new Program();
-            program.start();
+            program.Start();
         }
-        private void start()
-        {
+        private void Start()
+        {                           //example
             Console.WriteLine(VectorFromAngle(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity, true), startPoint, startVelocity).GetX());
             Console.WriteLine(VectorFromAngle(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity, true), startPoint, startVelocity).GetY());
-            Console.ReadLine();     //example
+            Console.ReadLine();     
         }
         //finds the angle that it should aim at to hit the endpoint (parabole)
         private float CalculateInitialAngle(Vector startPos, Vector endPos, float gravity, float initialVelocity, bool isLowAngle)
