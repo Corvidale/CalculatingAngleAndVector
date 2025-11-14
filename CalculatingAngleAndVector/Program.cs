@@ -9,7 +9,7 @@ namespace CalculatingAngleAndVector
 
     internal class Program
     {
-        private Vector startPoint = new Vector(1,1);        //testing values
+        private Vector startPoint = new Vector(1,1);        //example values
         private Vector endPoint = new Vector(5,5);
         private float startVelocity = 2;
         private float globalGravity = 0.01f;
@@ -21,8 +21,9 @@ namespace CalculatingAngleAndVector
         }
         private void start()
         {
-            Console.WriteLine(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity));
-            Console.ReadLine();     //testing
+            Console.WriteLine(VectorFromAngle(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity), startPoint, startVelocity).GetX());
+            Console.WriteLine(VectorFromAngle(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity), startPoint, startVelocity).GetY());
+            Console.ReadLine();     //example
 
             
         }
@@ -37,18 +38,21 @@ namespace CalculatingAngleAndVector
 
             if (underRoot < 0)  // checks if it is within range and for now it ouputs one if its not
             {
-                return 1;
+                Console.WriteLine("Outside of range ");
+                return 1; //Insert other thing if it is outside targetting range
             }
             float squareRoot = (float)Math.Sqrt(underRoot);     // rest of the kenematic parabole calc
             float lowAngle = (float)Math.Atan2((float)Math.Pow(initialVelocity, 2) - squareRoot , gravity * u.GetX());
 
-            return lowAngle;
+            return lowAngle;    //output in radiance
         }
-        private Vector VectorFromAngle(float angle,Vector startpos) 
-        { 
-        
-        
-            return new Vector(0, 0);
+        private Vector VectorFromAngle(float angle,Vector startpos,float initialVelocity) 
+        {
+            Vector launchVector = new Vector(
+                initialVelocity * (float)Math.Cos(angle), //x
+                initialVelocity * (float)Math.Sin(angle)); //y
+            
+            return launchVector;
         }
         
 
@@ -60,15 +64,14 @@ namespace CalculatingAngleAndVector
                 this.x = x;
                 this.y = y;
             }
-            public float GetX()     //allows access to x value
+            public float GetX()
             {
                 return x;
             }
-            public float GetY()     //allows access to y value
+            public float GetY()
             {
                 return y;
-            }
-        }
+            }      
+        }   // removed the SetX & SetY function because i didn't need it for this project
     }
-    
 }
