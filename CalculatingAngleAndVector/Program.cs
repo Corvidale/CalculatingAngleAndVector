@@ -21,14 +21,12 @@ namespace CalculatingAngleAndVector
         }
         private void start()
         {
-            Console.WriteLine(VectorFromAngle(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity), startPoint, startVelocity).GetX());
-            Console.WriteLine(VectorFromAngle(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity), startPoint, startVelocity).GetY());
+            Console.WriteLine(VectorFromAngle(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity, true), startPoint, startVelocity).GetX());
+            Console.WriteLine(VectorFromAngle(CalculateInitialAngle(startPoint, endPoint, globalGravity, startVelocity, true), startPoint, startVelocity).GetY());
             Console.ReadLine();     //example
-
-            
         }
         //finds the angle that it should aim at to hit the endpoint (parabole)
-        private float CalculateInitialAngle(Vector startPos, Vector endPos, float gravity, float initialVelocity)
+        private float CalculateInitialAngle(Vector startPos, Vector endPos, float gravity, float initialVelocity, bool isLowAngle)
         {
             Vector u = new Vector(endPos.GetX() - startPos.GetX(), endPos.GetY() - startPos.GetY());
 
@@ -42,9 +40,18 @@ namespace CalculatingAngleAndVector
                 return 1; //Insert other thing if it is outside targetting range
             }
             float squareRoot = (float)Math.Sqrt(underRoot);     // rest of the kenematic parabole calc
-            float lowAngle = (float)Math.Atan2((float)Math.Pow(initialVelocity, 2) - squareRoot , gravity * u.GetX());
+            
 
-            return lowAngle;    //output in radiance
+            if (!isLowAngle)   //returns the high angle if specified
+            {
+                float highAngle = (float)Math.Atan2((float)Math.Pow(initialVelocity, 2) + squareRoot, gravity * u.GetX());
+                return highAngle;   //output in radiance
+            } 
+            else     //returns the low angle if nothing is specified
+            {
+                float lowAngle = (float)Math.Atan2((float)Math.Pow(initialVelocity, 2) - squareRoot, gravity * u.GetX());
+                return lowAngle;    //output in radiance
+            }
         }
         private Vector VectorFromAngle(float angle,Vector startpos,float initialVelocity) 
         {
@@ -54,8 +61,6 @@ namespace CalculatingAngleAndVector
             
             return launchVector;
         }
-        
-
         private class Vector    //vector class cuz it's more convienient and it looks cool
         {
             float x, y;
