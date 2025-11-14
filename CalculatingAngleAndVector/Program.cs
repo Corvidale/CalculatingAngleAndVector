@@ -9,7 +9,10 @@ namespace CalculatingAngleAndVector
 
     internal class Program
     {
-        private Vector startPoint = new Vector(4,2);
+        private Vector startPoint = new Vector(1,1);
+        private Vector endPoint = new Vector(5,5);
+        private float startVelocity = 2;
+        private float globalGravity = 0.01f;
 
         static void Main(string[] args)
         {
@@ -18,8 +21,16 @@ namespace CalculatingAngleAndVector
         }
         private void start()
         {
-            Console.WriteLine(startPoint.getX());
+            Console.WriteLine(startPoint.GetX());
             Console.ReadLine();
+        }
+        private void CalculateInitialAngle(Vector startPos, Vector endPos, float gravity,float initialVelocity)
+        {
+
+        }
+        private void VectorFromAngle(float angle, Vector startPos)
+        {
+
         }
 
         private class Vector
@@ -30,11 +41,11 @@ namespace CalculatingAngleAndVector
                 this.x = x;
                 this.y = y;
             }
-            public float getX()
+            public float GetX()
             {
                 return x;
             }
-            public float getY()
+            public float GetY()
             {
                 return y;
             }
